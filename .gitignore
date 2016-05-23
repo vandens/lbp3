@@ -69,3 +69,14 @@ $RECYCLE.BIN/
 
 # Windows shortcuts
 *.lnk
+
+
+# Application
+app/logs/
+app/config/
+sys/
+sample/
+*.bak
+
+#other
+*.sql

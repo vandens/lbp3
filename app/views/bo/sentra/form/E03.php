@@ -1,0 +1,51 @@
+<table>
+  <tr>
+    <td width="24" bgcolor="#CCCCCC"><div align="center"><strong>No</strong></div></td>
+    <td width="500" bgcolor="#CCCCCC"><div align="center"><strong> PENGAWASAN TEMPAT PENGOLAHAN MAKANAN</strong></div></td>
+    <td width="125" bgcolor="#CCCCCC"><div align="center"><strong>Memenuhi Syarat higiene</strong></div></td>
+    <td width="125" bgcolor="#CCCCCC"><div align="center"><strong>Tidak Memenuhi Syarat higiene</strong></div></td>
+    <td width="125" bgcolor="#CCCCCC"><div align="center"><strong>Yang Dibina</strong></div></td>
+    <td width="125" bgcolor="#CCCCCC"><div align="center"><strong>Yang Diuji Petik</strong></div></td>
+  </tr>
+  <tr>
+    <td bgcolor="#FFFFFF"><div align="center">1</div>
+      </td>
+    <td bgcolor="#FFFFFF">Jumlah Industri Rumah Tangga </td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000537m" size="12" name="detail[E03_001][data_val][]" value="<?php echo $E03_001['data_val0']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000537t" size="12" name="detail[E03_001][data_val][]" value="<?php echo $E03_001['data_val1']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000537d" size="12" name="detail[E03_001][data_val][]" value="<?php echo $E03_001['data_val2']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000537p" size="12" name="detail[E03_001][data_val][]" value="<?php echo $E03_001['data_val3']; ?>"/></td>
+  </tr>                                                                                                                                   
+  <tr>                                                                                                                                    
+    <td bgcolor="#FFFFFF"><div align="center">2</div></td>                                                                                
+    <td bgcolor="#FFFFFF">Jumlah Jasa Boga </td>                                                                                          
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000538m" size="12" name="detail[E03_002][data_val][]" value="<?php echo $E03_002['data_val0']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000538t" size="12" name="detail[E03_002][data_val][]" value="<?php echo $E03_002['data_val1']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000538d" size="12" name="detail[E03_002][data_val][]" value="<?php echo $E03_002['data_val2']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000538p" size="12" name="detail[E03_002][data_val][]" value="<?php echo $E03_002['data_val3']; ?>"/></td>
+  </tr>                                                                                                                                   
+  <tr>                                                                                                                                    
+    <td bgcolor="#FFFFFF"><div align="center">3</div></td>                                                                                
+    <td bgcolor="#FFFFFF"> Jumlah Rumah Makan / Restoran </td>                                                                            
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000539m" size="12" name="detail[E03_003][data_val][]" value="<?php echo $E03_003['data_val0']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000539t" size="12" name="detail[E03_003][data_val][]" value="<?php echo $E03_003['data_val1']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000539d" size="12" name="detail[E03_003][data_val][]" value="<?php echo $E03_003['data_val2']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000539p" size="12" name="detail[E03_003][data_val][]" value="<?php echo $E03_003['data_val3']; ?>"/></td>
+  </tr>                                                                                                                                   
+  <tr>                                                                                                                                    
+    <td bgcolor="#FFFFFF"><div align="center">4</div></td>                                                                                
+    <td bgcolor="#FFFFFF"> Jumlah Tempat Makanan Jajanan </td>                                                                            
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000540m" size="12" name="detail[E03_004][data_val][]" value="<?php echo $E03_004['data_val0']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000540t" size="12" name="detail[E03_004][data_val][]" value="<?php echo $E03_004['data_val1']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000540d" size="12" name="detail[E03_004][data_val][]" value="<?php echo $E03_004['data_val2']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000540p" size="12" name="detail[E03_004][data_val][]" value="<?php echo $E03_004['data_val3']; ?>"/></td>
+  </tr>                                                                                                                                   
+  <tr>                                                                                                                                    
+    <td bgcolor="#FFFFFF"><div align="center">5</div></td>                                                                                
+    <td bgcolor="#FFFFFF"> Jumlah Depot Air Minum </td>                                                                                   
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000541m" size="12" name="detail[E03_005][data_val][]" value="<?php echo $E03_005['data_val0']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000541t" size="12" name="detail[E03_005][data_val][]" value="<?php echo $E03_005['data_val1']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000541d" size="12" name="detail[E03_005][data_val][]" value="<?php echo $E03_005['data_val2']; ?>"/></td>
+    <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();'  placeholder="Jumlah" id="S30000541p" size="12" name="detail[E03_005][data_val][]" value="<?php echo $E03_005['data_val3']; ?>"/></td>
+  </tr>
+</table>

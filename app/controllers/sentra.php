@@ -21,8 +21,9 @@ class Sentra extends CI_Controller {
 
 	public function initiate($data)
 	{
-		$formid 			= ($data['id']) ? $data['id'] : $data['form_id'];
-		$parent 			= in_array($formid, array('A02','A03','A04','A05','B02','B03','C01','D02','D03','D04','D05','D06','D09','D10','D11','D12')) ? 'PPP' : 'REP';
+		$formid 			= ($data['id']) ? substr($data['id'],0,1) : substr($data['form_id'],0,1);
+		
+		$parent 			= in_array($formid, array('A','B','C','D','E','F','G')) ? 'PPP' : (in_array($formid,array('H','I','J','K')) ? 'PPW' : (in_array($formid,array('L')) ? 'BPJ' : 'REP'));
 		$data['menu'] 		= anchor(base_url(), 'Home', 'title="Home"');
 		$data['nav']		= 'Sentra-Data';
 
@@ -62,7 +63,7 @@ class Sentra extends CI_Controller {
 		$data['mod']		=  empty($data['data_id']) ? $data['create'] : $data['update'];
 
 		$data['val']		= 'confirm';
-		$data['dlist']		= $this->general->droplist_setting(array('STA'));
+		$data['dlist']		= $this->general->droplist_setting(array('STA','DIS'));
 		if($data['data_id']){
 			$sql 	= $this->db->get_where('m_sentra',array('data_id'=>$data['data_id']))->row();
 			foreach($sql as $key => $val)
@@ -74,16 +75,34 @@ class Sentra extends CI_Controller {
 					$data[$vals->data_key][$v]	= $val;
 		}
 
-		$data['form']		= $this->load->view('bo/'.__CLASS__.'/form/'.$data['id'],$data,true);
+		$data['form']		= $this->load->view('bo/'.strtolower(__CLASS__).'/form/'.$data['id'],$data,true);
 		$data['contain']	= $this->load->view($view,$data,true);
 		$this->initiate($data);
 	}
 
 	public function validasi($str){
 		$post 	= $this->input->post();
+		
+		if($post['form_id'] == 'K09'){
+			foreach($post['selection'] as $key => $val)
+				if(empty($val)) $incomplete = true;
+
+			foreach ($post['selection'] as $key => $val) {
+				if(in_array($val, $checked))
+				 	$exist_list = true;
+				 else
+				 	$checked[] = $val;
+			}
+		}
+
 		$exist 	= $this->sentra_model->cek_data_exist($post);
 		$msg 	= '';
-		if($exist && empty($post['data_id'])) $msg 	= 'Data Periode '.$post['data_period'].' sudah ada!';		
+		if($exist && empty($post['data_id'])) 
+			$msg 	= 'Data Periode '.$post['data_period'].' sudah ada!';
+		elseif($incomplete) 
+			$msg 	= 'Data 10 penyakit terbanyak tidak lengkap';
+		elseif($exist_list)
+			$msg 	= 'Data 10 penyakit harus unik';		
 
 		if(!empty($msg)) $this->form_validation->set_message('validasi', $msg);	
 		return empty($msg) ? true : false;
@@ -93,7 +112,7 @@ class Sentra extends CI_Controller {
 	{
 		(!$this->session->userdata('user_islogin')) ? redirect(base_url('login')) : '';
 		$post 				= $this->input->post();	
-		#echo '<pre>'; print_r($post); die;
+		#echo '<pre>';print_r($post); die;
 		$data['create'] 	= $post['form_id'].'C';
 		$data['update'] 	= $post['form_id'].'U';
 
@@ -101,6 +120,7 @@ class Sentra extends CI_Controller {
 		$data['mod']		= empty($post['form_id']) ? $data['create'] : $data['update'];
 		$data['val']		= $post['submit'];
 		unset($post['submit']);
+		$data['dlist']		= $this->general->droplist_setting(array('STA','DIS'));
 					
 				
 		$data	 = array_merge($data,$post);
@@ -113,8 +133,6 @@ class Sentra extends CI_Controller {
 					$data['val']			= 'simpan';						
 					$data['dis'] 			= 'disabled';
 
-					#foreach($data['detail'] as $key => $val)
-					#$data[$key]			= empty($val) ? 0 : $val;
 					$this->session->set_userdata('data_'.$data['form_id'],$data);
 					$view 	= strtolower('bo/'.__CLASS__.'/form');	
 				}
@@ -135,8 +153,8 @@ class Sentra extends CI_Controller {
 					$data[$d_key][$keys.$key] = (empty($val)  && $data['val'] == 'simpan') ? 0 : $val;
 				
 
-
-		$data['form']		= $this->load->view('bo/'.__CLASS__.'/form/'.$data['form_id'],$data,true);
+		
+		$data['form']		= $this->load->view('bo/'.strtolower(__CLASS__).'/form/'.$data['form_id'],$data,true);
 		$data['contain']	= $this->load->view($view,$data,true);
 		$this->initiate($data);	
 	}
@@ -165,18 +183,22 @@ class Sentra extends CI_Controller {
 					$key 		= empty($data['data_id']) ? date('my',strtotime($data['data_period'])).substr(microtime(),-9,9) : $data['data_id'];
 
 
-
+					#echo '<pre>'; print_r($data); die;
 					foreach($data['detail'] as $d_key => $d_val){
 						unset($detil);
 						$detil['data_id']		= $key;
 						$detil['data_key']		= $d_key;
 						foreach($d_val as $keys => $value)
-							foreach($value as $ky => $val)	
-							$detil[$keys.$ky] = !empty($val) ? $val : null;
-							$detail[]		  = $detil;
+							foreach($value as $ky => $val)
+							$detil[$keys.$ky] = !empty($val) ? $val : null;				
+							
+							
+							if(in_array($data['form_id'],array('K09','L02'))) $detil['data_key0']	= !empty($data['selection'][$d_key]) ? $data['selection'][$d_key] : null;
 
+							$detail[]		    = $detil;
+						
 					}
-					
+					#echo '<pre>'; print_r($detail); die;
 
 					if(empty($data['data_id'])){
 

@@ -7,7 +7,7 @@ class Cron extends CI_Controller {
 	 		parent::__construct();
 			$this->load->model('model_pengguna');
 			$this->load->model('model_general');
-		  $this->load->library('email');
+		  	$this->load->library('email');
 	 		$this->_setting			= $this->model_general->get_app_setting();
 			$this->_master_priv 	= $this->model_general->get_master_priv();
 	}

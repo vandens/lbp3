@@ -1,3 +1,4 @@
+
 <table>
   <tr>
     <td width="24" bgcolor="purple" style='color:white'><div align="center"><strong>No</strong></div></td>
@@ -201,3 +202,5 @@
     <td bgcolor="#FFFFFF"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();' placeholder="P" id="S30000600lp" size="8" name="detail[H01_026][data_val][]" value="<?php echo $H01_026['data_val3']; ?>"/></td>
   </tr>
 </table>
+
+

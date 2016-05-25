@@ -112,5 +112,6 @@
 		<script src="<?php echo base_url(); ?>media/js/language/css.js"></script>
 		<script src="<?php echo base_url(); ?>media/js/language/javascript.js"></script>
 		-->
+		
 	</body>
 </html>

@@ -4,6 +4,7 @@
 		<?php echo $this->header; ?>
 		<?php echo $this->js; ?>
 		<?php echo $this->js_dtable; ?>
+		
 	</head>
 
 	<body class="skin-1">
@@ -59,6 +60,8 @@
 			<?php echo isset($this->footer) ? $this->footer : ''; ?>
 		</div><!-- /.main-container -->
 		<?php echo (!$true) ? $this->load->view('popup/modal') : ''; ?>
+
+
 
 	</body>
 </html>

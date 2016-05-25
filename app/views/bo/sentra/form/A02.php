@@ -34,8 +34,6 @@
     <td width="462"><input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();' placeholder="Jumlah yg ada" name="detail[A02_004][data_val][]" size="12" value="<?php echo $A02_004['data_val0']; ?>"/>
       <input type="text" <?=$dis;?> class="input-sm" style='margin:3px;' onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toUpperCase();' placeholder="Jumlah Binaan" name="detail[A02_004][data_val][]" size="12" value="<?php echo $A02_004['data_val1']; ?>"/></td>
   	</tr>
-
-
   <tr>
     <td width="12">2.</td>
     <td width="500"> Jumlah Kelompok TOGA (Taman Obat Keluarga) yang dibina</td>

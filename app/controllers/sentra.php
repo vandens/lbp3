@@ -190,10 +190,10 @@ class Sentra extends CI_Controller {
 						$detil['data_key']		= $d_key;
 						foreach($d_val as $keys => $value)
 							foreach($value as $ky => $val)
-							$detil[$keys.$ky] = !empty($val) ? $val : null;				
+							$detil[$keys.$ky] = !empty($val) ? $val : '';				
 							
 							
-							if(in_array($data['form_id'],array('K09','L02'))) $detil['data_key0']	= !empty($data['selection'][$d_key]) ? $data['selection'][$d_key] : null;
+							if(in_array($data['form_id'],array('K09','L02'))) $detil['data_key0']	= !empty($data['selection'][$d_key]) ? $data['selection'][$d_key] : '';
 
 							$detail[]		    = $detil;
 						
@@ -315,7 +315,10 @@ class Sentra extends CI_Controller {
 	{  
 		if(!$this->session->userdata('user_islogin')) redirect(base_url('login'));
 		$data 				= $this->uri->uri_to_assoc(3);
+		#$data['url']		= ;
 
+		$data['create'] 	= $data['id'].'C';
+		$data['update'] 	= $data['id'].'U';
 		$detail 			= $data['id'].'T';
 
 		$view 				= ($this->_priv->$detail) ? strtolower('bo/'.__CLASS__.'/form') : 'bo/temp/no_access'; // cek privi READ
@@ -323,61 +326,30 @@ class Sentra extends CI_Controller {
 		$data['sub'] 		= 'Detail Data '.$data['title'];
 		$data['mod']		= $detail;
 
-		$data['dlist']		= $this->general->droplist_setting(array('STA'));
+		$data['dlist']		= $this->general->droplist_setting(array('STA','DIS'));
+		
+
 		if($data['data_id']){
 			$sql 	= $this->db->get_where('m_sentra',array('data_id'=>$data['data_id']))->row();
 			foreach($sql as $key => $val)
 				$data[$key] = $val;
 
 			$sql 	= $this->db->get_where('m_sentra_detail',array('data_id'=>$data['data_id']))->result();
-			foreach($sql as $detail)
-				$data[$detail->data_key] 	= ($detail->data_val) ? $detail->data_val : '';
-
+			foreach($sql as $k => $vals)
+				foreach($vals as $v => $val)
+					$data[$vals->data_key][$v]	= empty($val) ? 0 : $val;
 			$data['dis']	= 'disabled';
-			$data['detail']	= true;
+			$data['form_detail']	= true;
 		}
 
-		$data['form']		= $this->load->view('bo/'.__CLASS__.'/form/'.$data['id'],$data,true);
-
+		$data['form']		= $this->load->view('bo/'.strtolower(__CLASS__).'/form/'.$data['id'],$data,true);
 		$data['contain']	= $this->load->view($view,$data,true);
 		$this->initiate($data);
+
+
 	}
 
-	public function detailx($key){		
-		(!$this->session->userdata('user_islogin')) ? redirect('login') : '';	
-		
-		$view = 'bo/temp/no_access';
-		if($this->_priv->GROT){
-		
-			if($data['data_id']){
-				$sql 	= $this->db->get_where('m_sentra',array('data_id'=>$data['data_id']))->row();
-				foreach($sql as $key => $val)
-					$data[$key] = $val;
 
-				$sql 	= $this->db->get_where('m_sentra_detail',array('data_id'=>$data['data_id']))->result();
-				foreach($sql as $detail)
-					$data[$detail->data_key] 	= ($detail->data_val) ? $detail->data_val : '';
-			}
-
-			$data['privlist'] 		= $this->user_model->get_exist_priv($key);
-
-			$data['confirm_priv']	= $this->user_model->confirm_priv($this->_master_priv,$data['privlist']);
-			
-					// echo '<pre>'; print_r($this->_master_priv);
-					// echo '<pre>'; print_R($data['privlist']); 
-					// echo '<pre>'; print_r($data['confirm_priv']); die;
-					
-
-			$view 			= strtolower('bo/'.__CLASS__.'/detail');
-		}		
-	
-		
-		$data['sub']		= 'Detail Grup : '.$data['group_name'];
-		$data['mod']		= 'GROT';
-		$data['contain']	= $this->load->view($view,$data,true);
-		$this->initiate($data);	
-	}
-	
 	public function getdata(){
 		(!$this->session->userdata('user_islogin')) ? redirect('home') : '';
 			if($this->_priv->SENR){

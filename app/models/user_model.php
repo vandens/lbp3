@@ -122,7 +122,7 @@ class User_model extends CI_Model{
 	}
 
 	function get_user_detail($key){
-		$sql 	= $this->db->select('a.*, b.pus_code, b.pus_name, c.group_name')
+		$sql 	= $this->db->select('a.*, b.pus_code, b.pus_name, b.pus_address, c.group_name')
 							->from('m_user a')
 							->join('m_puskes b','a.pus_code = b.pus_code','left')
 							->join('m_group c','a.group_id = c.group_id','left')

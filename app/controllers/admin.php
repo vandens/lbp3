@@ -41,7 +41,7 @@ class Admin extends CI_Controller {
 		$data['nav']		= 'Admin';
 		$data['sub'] 		= 'Dashboard';
 
-		$data['list']	= ''; # $this->mainlist();
+		$data['list']	=  $this->mainlist();
 	#	$list[]		=  $this->list1();
 	#	$list[]		=  $this->list2();
 	#	$list[]		=  $this->list3();		
@@ -75,7 +75,7 @@ class Admin extends CI_Controller {
 		return $this->load->view('bo/admin/list2',$d,true);
 	}
 
-	function berita(){
+	function list3(){
 		if(!$this->session->userdata('user_islogin')) redirect(base_url('login'));
 		
 		$data['title']	= 'Informasi Terbaru';
@@ -85,7 +85,7 @@ class Admin extends CI_Controller {
 								   ->limit(4)
 								   ->get('m_info');
 		
-		return $this->load->view('bo/admin/list2',$data,true);
+		return $this->load->view('bo/admin/list3',$data,true);
 	}
 	
 	public function info($key){

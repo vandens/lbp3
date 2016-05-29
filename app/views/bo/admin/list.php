@@ -23,13 +23,10 @@
 					<td>Nama Pengguna</td><td>:</td><td><?php echo $this->session->userdata('user_fullname'); ?></td>
 				</tr>
 				<tr>
-					<td>Email</td><td>:</td><td><?php echo $this->session->userdata('user_email'); ?></td>
+					<td>Puskesmas</td><td>:</td><td><?php echo ucwords(strtolower($this->session->userdata('pus_name'))).' ('.$this->session->userdata('pus_code').')';; ?></td>
 				</tr>
 				<tr>
-					<td>Desa</td><td>:</td><td><?php echo $this->session->userdata('village_name'); ?></td>
-				</tr>
-				<tr>
-					<td>Alamat</td><td>:</td><td><?php echo $this->session->userdata('village_address'); ?></td>
+					<td>Alamat</td><td>:</td><td><?php echo $this->session->userdata('pus_address'); ?></td>
 				</tr>
 			</table>
 		</div>

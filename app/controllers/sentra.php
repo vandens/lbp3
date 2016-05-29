@@ -11,13 +11,13 @@ class Sentra extends CI_Controller {
 	public $_setting;
 
 	public function __construct()
-    {
-        parent::__construct();
-        $this->load->model('sentra_model');
-        $this->_setting 	= $this->general->get_app_setting();
-        $this->_priv 		= $this->general->get_privi_list();
-		$this->_master_priv = $this->general->get_master_priv();
-    }
+  {
+     parent::__construct();
+     $this->load->model('sentra_model');
+     $this->_setting 	= $this->general->get_app_setting();
+     $this->_priv 		= $this->general->get_privi_list();
+		 $this->_master_priv = $this->general->get_master_priv();
+  }
 
 	public function initiate($data)
 	{
@@ -112,7 +112,7 @@ class Sentra extends CI_Controller {
 	{
 		(!$this->session->userdata('user_islogin')) ? redirect(base_url('login')) : '';
 		$post 				= $this->input->post();	
-		#echo '<pre>';print_r($post); die;
+		
 		$data['create'] 	= $post['form_id'].'C';
 		$data['update'] 	= $post['form_id'].'U';
 
@@ -152,7 +152,6 @@ class Sentra extends CI_Controller {
 				foreach($value as $key => $val)
 					$data[$d_key][$keys.$key] = (empty($val)  && $data['val'] == 'simpan') ? 0 : $val;
 				
-
 		
 		$data['form']		= $this->load->view('bo/'.strtolower(__CLASS__).'/form/'.$data['form_id'],$data,true);
 		$data['contain']	= $this->load->view($view,$data,true);

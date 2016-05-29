@@ -60,7 +60,7 @@ class Login extends CI_Controller {
 				$data['menu'] 		= anchor(base_url(), 'Home', 'title="Home"');
 				$data['nav']		= 'Admin';
 				$data['sub'] 		= 'Dashboard';
-				$data['contain']	= $this->load->View('sample/blank',$data,true);
+				#$data['contain']	= $this->load->View('sample/blank',$data,true);
 				$this->header  		= $this->load->view('bo/header',$data,true);
 				$this->js 			= $this->load->view('bo/js',array(),true);
 				$this->load->view('bo/login/index',$data);
@@ -124,14 +124,14 @@ class Login extends CI_Controller {
 				$update['user_updateby']	= $this->session->userdata('user_id');
 				$update['user_updatetime']	= date('Y-m-d H:i:s');
 
-				$update = $this->db->where('village_code',$this->session->userdata('village_code'))
+				$update  = $this->db->where('pus_code',$this->session->userdata('pus_code'))
 						 			->where('user_id',$this->session->userdata('user_id'))
 						 			->update('m_user',$update);
 				if($update){
 					$return['status']	= 'success';
 					$return['msg']		= 'Kata sandi berhasil diganti';
 				}else{
-					$return['msg']		= 'Terjadi Kesalahan';
+					$return['msg']		= 'Terjadi Kesalahan ';
 				}
 				
 			}
@@ -153,6 +153,8 @@ class Login extends CI_Controller {
 			$ret['msg'] 	= 'Sandi Baru tidak boleh kosong';
 		elseif($post['pass2'] != $post['pass3'])
 			$ret['msg'] 	= 'Konfirmasi Sandi tidak sama';
+		elseif(strlen($post['pass2']) < 6)
+			$ret['msg'] 	= 'Sandi minimal 6 karakter';
 		elseif($old_pass->user_pass != sha1($this->session->userdata('user_id').md5($this->session->userdata('user_id').$post['pass1'])))
 			$ret['msg']		= 'Sandi Lama Salah!';
 

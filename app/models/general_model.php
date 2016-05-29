@@ -53,7 +53,7 @@ class General_model extends CI_Model{
 
 	public function get_old_pass($data){
 		$sql 	= $this->db->where('user_id',$this->session->userdata('user_id'))
-						   ->where('village_code',$this->session->userdata('village_code'))
+						   ->where('pus_code',$this->session->userdata('pus_code'))
 						   ->get('m_user');
 		return $sql->row();
 	}

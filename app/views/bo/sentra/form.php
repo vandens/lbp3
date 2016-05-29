@@ -89,7 +89,7 @@ input[type="text"] {
 }	
 </style>
 <script>
-  $("input[type='text']").removeAttr("disabled");
-  $("input[type='text']").removeAttr("readonly");
+  //$("input[type='text']").removeAttr("disabled");
+  //$("input[type='text']").removeAttr("readonly");
 </script>
 <?php } ?>

@@ -120,7 +120,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label" for="form-field-1"> No Telepon</label>
 									<div class="col-sm-9">						
-										<input type='text' class='col-xs-5 col-sm-2' name='user_phone' value='<?php echo $user_phone; ?>' placeholder='No Telepon'>
+										<input type='text' class='col-xs-5 col-sm-2' name='user_phone' value='<?php echo $user_phone; ?>' placeholder='No Telepon' required onkeypress='this.value=ignoreSpaces(this.value); return NumOnly(event);' onkeyup='javascript:this.value = this.value.toLowerCase();'>
 									</div>
 								</div>
 														

@@ -1,5 +1,5 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-
+ob_start();
 class Sentra extends CI_Controller {
 
 	/**
@@ -347,6 +347,59 @@ class Sentra extends CI_Controller {
 
 
 	}
+
+
+
+	public function pdf()
+	{  
+		if(!$this->session->userdata('user_islogin')) redirect(base_url('login'));
+		$data 				= $this->uri->uri_to_assoc(3);
+		
+		$data['create'] 	= $data['id'].'C';
+		$data['update'] 	= $data['id'].'U';
+		$detail 			= $data['id'].'T';
+
+		$view 				= ($this->_priv->$detail) ? strtolower('bo/temp/pdf_header') : 'bo/temp/no_access'; // cek privi READ
+		$data['title']		= $this->sentra_model->get_title($data['id']);
+		$data['sub'] 		= 'Detail Data '.$data['title'];
+		$data['mod']		= $detail;
+		$data['pus']		= $this->db->where('pus_code',$this->session->userdata('pus_code'))->get('m_puskes')->row();
+		$data['dlist']		= $this->general->droplist_setting(array('STA','DIS'));
+		
+
+		if($data['data_id']){
+			$sql 	= $this->db->get_where('m_sentra',array('data_id'=>$data['data_id']))->row();
+			foreach($sql as $key => $val)
+				$data[$key] = $val;
+
+			$sql 	= $this->db->get_where('m_sentra_detail',array('data_id'=>$data['data_id']))->result();
+			foreach($sql as $k => $vals)
+				foreach($vals as $v => $val)
+					$data[$vals->data_key][$v]	= empty($val) ? 0 : $val;
+			$data['dis']	= 'disabled';
+			$data['form_detail']	= true;
+		}
+
+		#$data['header']		= $this->load->view('bo/header',$data,true);
+		$data['form']		= $this->load->view('bo/sentra/form/'.$data['id'],$data,true);
+		$html 				= $this->load->view($view,$data,true);		
+
+		//load mPDF library
+		$this->load->library('m_pdf');
+		$pdf = $this->m_pdf->load();
+		$stylesheet = file_get_contents('media/css/bootstrap.css');
+		$pdf->WriteHTML($stylesheet,1);	// The parameter 1 tells that this is css/style only and no body/html/text
+		$pdf->SetWatermarkText('');
+		$pdf->showWatermarkText = true;
+		$pdf->SetTitle($data['title']);
+		$pdf->SetFooter($data['title'].'|{PAGENO}|'.$this->_setting->app_author);
+		$pdf->WriteHTML($html);
+		ob_end_clean();
+		$pdf->Output();
+
+	}
+
+
 
 
 	public function getdata(){

@@ -17,7 +17,7 @@
 						<?php $ico = ($val == 'confirm') ? 'fa-share-square-o' : 'fa-save'; ?>
 						<?php $btn = ($val == 'confirm') ? 'btn-danger' : 'btn-info'; ?>
 						<?php echo (($this->_priv->$create || $this->_priv->$update) && !$form_detail) ? "<button data-rel='tooltip' type='submit' name='submit' value='".$val."'  class='btn ".$btn." btn-white btn-round btn-sm fa ace-icon fa ".$ico."'  title='".$val."' data-placement='bottom'></button>" : "<a href='".base_url($this->router->fetch_class().'/form/'.$this->uri->assoc_to_uri($this->uri->uri_to_assoc(3)))."' class='btn btn-info btn-white btn-round btn-sm fa ace-icon fa fa-edit'  title='Edit' data-placement='bottom' data-rel='tooltip'></a>"; ?>
-						<?php echo ($form_detail) ? "<a target='_blanks' href='".base_url('sentra-data/pdf/'.$this->uri->assoc_to_uri($this->uri->uri_to_assoc(3)))."' class='btn btn-warning btn-white btn-round btn-sm fa ace-icon fa fa-print'  title='PDF' data-placement='bottom' data-rel='tooltip'></a>" : ''; ?>
+						<?php echo ($form_detail) ? "<a target='_blanks' href='".base_url('global-report/pdf/'.$this->uri->assoc_to_uri($this->uri->uri_to_assoc(3)))."' class='btn btn-warning btn-white btn-round btn-sm fa ace-icon fa fa-print'  title='PDF' data-placement='bottom' data-rel='tooltip'></a>" : ''; ?>
 						
 					</div>
 					</div>

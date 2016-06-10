@@ -40,7 +40,7 @@ class Sentra extends CI_Controller {
 	public function index()
 	{  
 		if(!$this->session->userdata('user_islogin')) redirect(base_url('login'));
-		$view 				= ($this->_priv->GROR) ? strtolower('bo/'.__CLASS__.'/index') : 'bo/temp/no_access'; // cek privi READ
+		$view 				= ($this->_priv->SENR) ? strtolower('bo/'.__CLASS__.'/index') : 'bo/temp/no_access'; // cek privi READ
 		
 		$data['sub'] 		= 'Data Utama';
 		$data['mod']		= 'SENR';

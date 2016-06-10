@@ -125,6 +125,8 @@ class Report_master extends CI_Controller {
 		(!$this->session->userdata('user_islogin')) ? redirect('home') : '';
 			if($this->_priv->MSRR){
 					
+				if(!$this->session->userdata('admin'))
+				$_GET['columns'][0]['search']['value'] = $this->session->userdata('pus_code');
 				$columns 	= array(
 									array( 'db' => 'pus_code', 				'dt' => 0),
 									array( 'db' => 'pus_name', 				'dt' => 1),

@@ -8,13 +8,13 @@
 								<?php echo $sub;?>
 						</h4>
 					<div class='pull-right'>	
-						<button data-rel='tooltip' onclick="JSimpan('<?php echo base_url('login/reset'); ?>',$('#form').serialize(),'0','clear')" type='submit' name='submit' value='<?php echo $val; ?>'  class='btn btn-success btn-white btn-round btn-sm fa ace-icon fa fa-save'  title='Simpan' data-placement='bottom'></button>
+						<button data-rel='tooltip' onclick="JSimpan('<?php echo base_url('login/reset'); ?>',$('#form_reset_pass').serialize(),'0','clear')" type='submit' name='submit' value='<?php echo $val; ?>'  class='btn btn-success btn-white btn-round btn-sm fa ace-icon fa fa-save'  title='Simpan' data-placement='bottom'></button>
 					</div>
 					</div>
 						<div class="widget-body">
 							<div class="widget-main" id='widget-main'>
 							<div id='AlertModal' class="alert" style='display:none;'></div>
-							<form class="form-horizontal" id='form' action="<?php echo base_url($this->router->fetch_class().'/simpan'); ?>" class='form' method='post' role="form">	
+							<form class="form-horizontal" id='form_reset_pass' action="<?php echo base_url($this->router->fetch_class().'/simpan'); ?>" class='form' method='post' role="form">	
 								<div class='row'>						
 									<div class="form-group">
 										<label class="col-sm-5"> Sandi Lama</label>

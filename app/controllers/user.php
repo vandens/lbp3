@@ -162,7 +162,7 @@ class User extends CI_Controller {
 							$msg 	= 'Berhasil Simpan Data';
 							
 						if($data['pass_ismail'] != 0)
-							echo "<script>window.open('".base_url('user/mailpass/'.$data['pass_ismail'].'/'.$data['auto'])."','Informasi Kata Sandi','width=750,height=626,resizable=yes,scrollbars=yes,status=yes')</script>";
+							echo "<script>window.open('".base_url('user/mailpass/'.$data['pass_ismail'].'/'.$data['user_id'])."','Informasi Kata Sandi','width=750,height=626,resizable=yes,scrollbars=yes,status=yes')</script>";
 						
 					}
 					
@@ -186,7 +186,7 @@ class User extends CI_Controller {
 		$ismail 		= $this->uri->segment(3,true);
 		$key 			= $this->uri->segment(4,true);
 		
-		$sql 			= $this->db->get_where('m_user',array('auto'=>$key));
+		$sql 			= $this->db->get_where('m_user',array('user_id'=>$key));
 		if($sql->num_rows() > 0){
 			foreach($sql->result() as $row);
 			$group 			= ($row->user_isgroup == 'Yes') ? $row->group_id : 'Custom User';
@@ -292,8 +292,8 @@ class User extends CI_Controller {
 	public function getdata(){
 		(!$this->session->userdata('user_islogin')) ? redirect('home') : '';
 			if($this->_priv->USER){
-				#if(!$this->session->userdata('admin'))
-				#	$_GET['columns'][2]['search']['value'] = $this->session->userdata('pus_code');
+				if(!$this->session->userdata('admin'))
+					$_GET['columns'][2]['search']['value'] = $this->session->userdata('pus_code');
 					
 
 				$columns 	= array(

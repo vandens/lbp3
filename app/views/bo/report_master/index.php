@@ -19,7 +19,7 @@
 						<th>Waktu Update</th>
 						<th>Status</th>
 						<?php
-						if(isset($this->_priv->GLBP) || isset($this->_priv->GLBT))
+						if(isset($this->_priv->MSRP) || isset($this->_priv->MSRT))
 							echo "<th width='80px'>Opsi</th>";
 						?>		
 					</tr>

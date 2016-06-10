@@ -106,11 +106,7 @@ class Login extends CI_Controller {
 	public function reset(){
 		if(!$this->session->userdata('user_islogin')) redirect(base_url('login'));		
 		
-	#	$view 				 = ($this->_priv->) ? strtolower('bo/'.__CLASS__.'/form') : 'bo/temp/no_access'; // cek privi READ
-		$data['sub'] 		=  'Form Ganti Kata Sandi'; # empty($key) ? 'Tambah Data Album' : 'Edit Data Album';
-	#	$data['mod']		=  empty($key) ? 'ALBC' : 'ALBU';
-	#	$data['val']		= 'confirm';
-	#	$data['true']		= true;
+		$data['sub'] 		=  'Form Ganti Kata Sandi'; 
 		if(!$this->input->post()){
 			$this->load->view('bo/login/form',$data);
 			$this->general->writelog('LOGR',$data['sub']);

@@ -13,6 +13,7 @@
 					</div>
 					</h4>
 					</div>
+				<!--
 						<div class="widget-body">
 							<div class="widget-main">		
 									
@@ -32,6 +33,7 @@
 								
 						</div>
 					</div>
+				-->
 				</div>									
 				
 
@@ -39,7 +41,7 @@
 			</div><!-- /.col -->
 			<div class="col-xs-12">
 				<br>
-				<?php echo $grafik_1; ?>
+				<?php echo $grafik; ?>
 			</div>
 
 		</div><!-- /.row -->

@@ -67,10 +67,106 @@ class Report_global extends CI_Controller {
 
 		if($data['period']){
 		
+			#$grafik1		= $this->grafik1($period);
+			$grafik2		= $this->grafik2($period);
+
+		
+			$graf['global1']		= $grafik1['header'];
+			$graf['detail1']		= $grafik1['detail'];
+			$graf['title1']			= 'Laporan Pencapaian Global Report Kategori Periode bulan '.$period;
+
+			
+			$graf['global2']		= $grafik2['header'];
+			$graf['detail2']		= $grafik2['header'];
+			$graf['title2']			= 'Laporan Pencapaian Global Report Puskesmas Periode bulan '.$period;
+
+			$data['grafik']			= $this->load->view('bo/report_global/grafik',$graf,true);
+
+		}
+
+
+		$data['form']		= $this->load->view('bo/report_global/detail',$data,true);
+		$data['contain']	= $this->load->view($view,$data,true);
+		$this->initiate($data);
+
+
+	}
+
+	public function grafik1($period){
+
+			$get_puskes		= $this->db->where('pus_status','active')->order_by('pus_name ASC')->get('m_puskes')->result();
+			$get_header 	= $this->report_model->get_header_list1($period);	
+			$get_detail 	= $this->report_model->get_detail_list1($period);	
+			
+			#----------------------  Grafik 1---------------------#
+			foreach($get_detail as $inputed_data){
+				$list_data[$inputed_data->form_id][$inputed_data->pus_code] 	= $inputed_data->total;
+			}
+			#echo '<pre>'; print_r($list_data); die;
+			foreach($get_header as $pus => $kes){
+				foreach($get_puskes as $get => $detil){
+
+					$total 		= ($list_data[$kes->modul_id][$detil->pus_code]) ? $list_data[$kes->modul_id][$detil->pus_code] : 0;
+					$x[] 		= array($detil->pus_code,$total);
+					#echo '<pre>'; print_r($detil); die;
+				}				
+
+				$xdetil[$kes->modul_id] = $x;
+				unset($x);
+			}
+
+
+
+			if(count($get_header) > 0){
+				foreach($get_header as $row => $val){
+
+		#			echo '<pre>'; print_r($xdetil[$val->modul_name]); die;
+					#---------------------- Header  Grafik 1---------------------#
+					$json['name']		= $val->modul_name;
+					$json['y']			= $val->total; 	//number_format(($val->total/count($get_puskes)) * 100,2);
+					$json['drilldown']	= $val->modul_name;
+					$json_data[] 		= $json;
+
+					unset($json);
+					#---------------------- Detail  Grafik 1---------------------#
+					$json['name']		= $val->modul_name;
+					$json['id']			= $val->modul_name;
+					$json['data'] 		= $xdetil[$val->modul_id];
+
+					$json_data2[] 		= $json;
+				}
+
+
+			}
+			#echo '<pre>'; print_r(json_encode($json_data2)); die;
+			// [{"name":"Pembinaan UKBM","id":"Pembinaan UKBM","data":[[null,0],[null,0]}]
+			// [{"name":"BALARAJA","id":"BALARAJA","data":[["Penyebarluasan Info Kesehatan",100],["Keanggotaan",100]}]
+
+			#---------------------- Header  Grafik 1---------------------#
+			$header = json_encode($json_data);
+			$header = str_replace('"name"','name', $header);
+			$header = str_replace('"y":"','y:', $header);
+			$header = str_replace('","drilldown"',',drilldown', $header);
+			$header = str_replace('"',"'", $header);
+
+			#---------------------- Detail  Grafik 1---------------------#
+			$detail = json_encode($json_data2);
+			$detail = str_replace('"name"','name', $detail);
+			$detail = str_replace('"id"','id', $detail);
+			$detail = str_replace('"data"','data', $detail);
+			$detail = str_replace('"',"'", $detail);
+
+			return array('header'=>$header,'detail'=>$detail);
+
+	}
+
+	public function grafik2($period){
+
 			$get_modul 		= $this->report_model->get_modul_list();
 			$get_header 	= $this->report_model->get_header_list($period);	
-			$get_detail 	= $this->report_model->get_detail_list($period);
-			
+			$get_detail 	= $this->report_model->get_detail_list($period);			
+
+			#----------------------  Grafik 2---------------------#
 			foreach($get_detail as $inputed_data){
 				$list_data[$inputed_data->pus_code][$inputed_data->form_id] 	= $inputed_data->total;
 			}
@@ -80,23 +176,22 @@ class Report_global extends CI_Controller {
 				foreach($get_modul as $get => $detil){
 					$total 		= ($list_data[$kes->pus_code][$detil->modul_id]) ? 100 : 0;
 					$x[] 		= array($detil->modul_name,$total);
+
 				}				
 				$xdetil[$kes->pus_code] = $x;
 				unset($x);
 			}
 
-
-
 			if(count($get_header) > 0){
 				foreach($get_header as $row => $val){
-					#---------------------- Header  Grafik ---------------------#
+					#---------------------- Header  Grafik 2---------------------#
 					$json['name']		= $val->pus_name;
 					$json['y']			= number_format(($val->total/count($get_modul)) * 100,2);
 					$json['drilldown']	= $val->pus_name;
 					$json_data[] 		= $json;
 
 					unset($json);
-					#---------------------- Detail  Grafik ---------------------#
+					#---------------------- Detail  Grafik 2---------------------#
 					$json['name']		= $val->pus_name;
 					$json['id']			= $val->pus_name;
 					$json['data'] 		= $xdetil[$val->pus_code];
@@ -104,33 +199,21 @@ class Report_global extends CI_Controller {
 				}
 			}
 
-			#---------------------- Header  Grafik ---------------------#
-			$grafik1_header = json_encode($json_data);
-			$grafik1_header = str_replace('"name"','name', $grafik1_header);
-			$grafik1_header = str_replace('"y":"','y:', $grafik1_header);
-			$grafik1_header = str_replace('","drilldown"',',drilldown', $grafik1_header);
-			$grafik1_header = str_replace('"',"'", $grafik1_header);
-			
+			#---------------------- Header  Grafik 2---------------------#
+			$header = json_encode($json_data);
+			$header = str_replace('"name"','name', $header);
+			$header = str_replace('"y":"','y:', $header);
+			$header = str_replace('","drilldown"',',drilldown', $header);
+			$header = str_replace('"',"'", $header);
 
+			#---------------------- Detail  Grafik 2---------------------#
+			$detail = json_encode($json_data2);
+			$detail = str_replace('"name"','name', $detail);
+			$detail = str_replace('"id"','id', $detail);
+			$detail = str_replace('"data"','data', $detail);
+			$detail = str_replace('"',"'", $detail);
 
-			#---------------------- Detail  Grafik ---------------------#
-			$grafik1_detail = json_encode($json_data2);
-			$grafik1_detail = str_replace('"name"','name', $grafik1_detail);
-			$grafik1_detail = str_replace('"id"','id', $grafik1_detail);
-			$grafik1_detail = str_replace('"data"','data', $grafik1_detail);
-			$grafik1_detail = str_replace('"',"'", $grafik1_detail);
-		}
-		
-		$graf1['global']	= $grafik1_header;
-		$graf1['detail']	= $grafik1_detail;
-
-		$graf1['title']		= 'Laporan Pencapaian Global Report Periode bulan '.$period;
-		$data['grafik_1']	= $this->load->view('bo/report_global/grafik_1',$graf1,true);
-
-		$data['form']		= $this->load->view('bo/report_global/detail',$data,true);
-		$data['contain']	= $this->load->view($view,$data,true);
-		$this->initiate($data);
-
+			return array('header'=>$header,'detail'=>$detail);
 
 	}
 
